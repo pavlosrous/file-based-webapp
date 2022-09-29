@@ -1,0 +1,5 @@
+Student_ID,FirstName,LastName,SSN,Major,DOB,Address,GPA
+1,Stelios,Rousoglou,109-091-621,CS,2000-07-16,"127 Saint Clemens Rd, MA, 02123",3.6
+2,Stelios,Rousoglou,213-313-123,CS,2000-04-14,"22 Irving St, MA, 02912",4.0
+4,Test,Rousoglou,213-313-523,CS,2000-04-14,"22 Irving St, MA, 02912",4.0
+3,Test,Rousoglou,213-313-623,CS,2000-04-14,"22 Irving St, MA, 02912",4.0
