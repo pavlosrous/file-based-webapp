@@ -1,9 +1,13 @@
-import "./App.css";
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import StudentList from "./componets/StudentList";
+import "./App.css";
+import Form from "./componets/Form";
+import APIService from "./componets/APIService";
 
 function App() {
   const [students, setStudents] = useState([]);
+  const [editedStudent, setEditedStudent] = useState();
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/get", {
@@ -16,6 +20,20 @@ function App() {
       .then((response) => setStudents(response)) // save our response (which is students) inside the setArticles hook
       .catch((error) => console.log(error));
   }, []);
+
+  const editStudent = (student) => {
+    setEditedStudent(student);
+  };
+  // TODO: Handle error gracefully -%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-
+  const submitStudent = (student) => {
+    console.log(JSON.stringify(student).split(":"));
+    if (JSON.stringify(student).split(":")[0].includes("ERROR")) {
+      console.log(JSON.stringify(student));
+      console.log("ERROR");
+    } else {
+      setStudents(student);
+    }
+  };
 
   return (
     <div className="app-container">
@@ -32,105 +50,107 @@ function App() {
             <th>GPA</th>
           </tr>
         </thead>
-        <tbody>
-          {students.map((student) => {
-            console.log(student.GPA);
-            return (
-              <tr key={student.Student_ID}>
-                <td>{student.Student_ID}</td>
-                <td>{student.FirstName}</td>
-                <td>{student.LastName}</td>
-                <td>{student.SSN}</td>
-                <td>{student.Major}</td>
-                <td>{student.DOB}</td>
-                <td>{student.Address}</td>
-                <td>{student.GPA}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+        {/* pass students list and edisStudent function to child */}
+        <StudentList students={students} editStudent={editStudent} />
       </table>
+      {editedStudent ? (
+        <Form student={editedStudent} submitStudent={submitStudent} />
+      ) : null}
+      {/*If editedStudent is not null, we render the form */}
       <br />
       <h3>Add a Student</h3>
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">
+      <form className="form-inline">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputName3">
             First name
           </label>
           <input
-            type="email"
-            class="form-control"
+            type="text"
+            className="form-control"
             id="fname"
+            name="firstName"
             placeholder="First name"
             required="required"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputName3">
             Last name
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="lname"
+            name="lastName"
             placeholder="Last name"
+            required="required"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputSSN3">
             SSN
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="ssn"
-            placeholder="Password"
+            name="ssn"
+            placeholder="SSN"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputMajord3">
             Major
           </label>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="major"
-            placeholder="Password"
+            name="major"
+            placeholder="Major"
+            required="required"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputDOB3">
             Date of birth
           </label>
           <input
             type="date"
-            class="form-control"
+            className="form-control"
             id="dob"
+            name="dob"
             placeholder="Date of birth"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputAddress3">
             Address
           </label>
           <input
-            type="text"
-            class="form-control"
+            type="address"
+            className="form-control"
             id="addr"
+            name="address"
             placeholder="Address"
           />
         </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">
+        <div className="form-group">
+          <label className="sr-only" htmlFor="exampleInputGPA3">
             GPA
           </label>
-          <input type="float" class="form-control" id="gpa" placeholder="GPA" />
+          <input
+            type="float"
+            className="form-control"
+            id="gpa"
+            name="gpa"
+            placeholder="GPA"
+          />
         </div>
         <button
           type="submit"
-          class="btn btn-default"
+          className="btn btn-default"
           style={{
-            borderColor: "black",
             width: "70px",
             height: "38px",
             marginTop: "30px",
