@@ -2,12 +2,21 @@ import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import StudentList from "./componets/StudentList";
 import "./App.css";
-import Form from "./componets/Form";
+import UpdateForm from "./componets/UpdateForm";
 import APIService from "./componets/APIService";
+import InsertForm from "./componets/InsertForm";
+import SearchById from "./componets/SearchById";
+import SearchByAny from "./componets/SearchByAny";
+import DBFormatToggle from "./componets/DBFormatToggle";
+import SearchByDate from "./componets/SearchByDateRange";
 
 function App() {
   const [students, setStudents] = useState([]);
   const [editedStudent, setEditedStudent] = useState();
+  const [error, setError] = useState(null);
+  const [getResponseById, setGetResponseById] = useState();
+  const [getResponseByAny, setGetResponseByAny] = useState();
+  const [getResponseByDateRange, setGetResponseByDateRange] = useState();
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/get", {
@@ -24,9 +33,14 @@ function App() {
   const editStudent = (student) => {
     setEditedStudent(student);
   };
-  // TODO: Handle error gracefully -%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-%-
+  // notifies App.js that an update happened so we can update the UI
+
   const submitStudent = (student) => {
-    console.log(JSON.stringify(student).split(":"));
+    setStudents(student);
+  };
+
+  // notifies App.js that an insert happened so we can update the UI
+  const insertStudent = (student) => {
     if (JSON.stringify(student).split(":")[0].includes("ERROR")) {
       console.log(JSON.stringify(student));
       console.log("ERROR");
@@ -35,8 +49,34 @@ function App() {
     }
   };
 
+  const deleteStudent = (student) => {
+    if (JSON.stringify(student).split(":")[0].includes("ERROR")) {
+      console.log(JSON.stringify(student));
+      console.log("ERROR");
+    } else {
+      setStudents(student);
+    }
+  };
+
+  const showError = (error) => {
+    setError(error);
+  };
+
+  const showStudentById = (student) => {
+    setGetResponseById(student);
+  };
+
+  const showStudentByAny = (student) => {
+    setGetResponseByAny(student);
+  };
+
+  const showStudentByDateRange = (student) => {
+    setGetResponseByDateRange(student);
+  };
+
   return (
     <div className="app-container">
+      <h1>WELCOME TO CMPSC-363</h1>
       <table>
         <thead>
           <tr>
@@ -51,114 +91,166 @@ function App() {
           </tr>
         </thead>
         {/* pass students list and edisStudent function to child */}
-        <StudentList students={students} editStudent={editStudent} />
+        <StudentList
+          students={students}
+          editStudent={editStudent}
+          deleteStudent={deleteStudent}
+        />
       </table>
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
       {editedStudent ? (
-        <Form student={editedStudent} submitStudent={submitStudent} />
+        <UpdateForm
+          student={editedStudent}
+          submitStudent={submitStudent}
+          showError={showError}
+          editStudent={editStudent}
+        />
       ) : null}
       {/*If editedStudent is not null, we render the form */}
+
       <br />
-      <h3>Add a Student</h3>
-      <form className="form-inline">
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputName3">
-            First name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="fname"
-            name="firstName"
-            placeholder="First name"
-            required="required"
-          />
+      <h3>Add Student</h3>
+      <DBFormatToggle />
+
+      <InsertForm insertStudent={insertStudent} showError={showError} />
+      <div>
+        <SearchById showStudent={showStudentById} showError={showError} />
+      </div>
+      {getResponseById ? (
+        <div>
+          <h3 style={{ fontSize: "20px", width: "200px" }}>Search Result</h3>
+          <table className="table table-striped">
+            <tbody>
+              <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>SSN</th>
+                <th>Major</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>GPA</th>
+              </tr>
+              {getResponseById.map((response) => {
+                return (
+                  <tr key={response.Student_ID}>
+                    <td>{response.Student_ID}</td>
+                    <td>{response.FirstName}</td>
+                    <td>{response.LastName}</td>
+                    <td>{response.SSN}</td>
+                    <td>{response.Major}</td>
+                    <td>{response.DOB}</td>
+                    <td>{response.Address}</td>
+                    <td>{response.GPA}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <button
+            className="btn btn-default"
+            style={{
+              marginBottom: "15px",
+            }}
+            onClick={() => showStudentById(null)}
+          >
+            Close
+          </button>
         </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputName3">
-            Last name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="lname"
-            name="lastName"
-            placeholder="Last name"
-            required="required"
-          />
+      ) : null}
+      <SearchByAny showStudentByAny={showStudentByAny} showError={showError} />
+      {getResponseByAny ? (
+        <div>
+          <h3 style={{ fontSize: "20px", width: "200px" }}>Search Result</h3>
+          <table className="table table-striped">
+            <tbody>
+              <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>SSN</th>
+                <th>Major</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>GPA</th>
+              </tr>
+              {getResponseByAny.map((response) => {
+                return (
+                  <tr key={response.Student_ID}>
+                    <td>{response.Student_ID}</td>
+                    <td>{response.FirstName}</td>
+                    <td>{response.LastName}</td>
+                    <td>{response.SSN}</td>
+                    <td>{response.Major}</td>
+                    <td>{response.DOB}</td>
+                    <td>{response.Address}</td>
+                    <td>{response.GPA}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <button
+            className="btn btn-default"
+            style={{
+              marginBottom: "15px",
+            }}
+            onClick={() => showStudentByAny(null)}
+          >
+            Close
+          </button>
         </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputSSN3">
-            SSN
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="ssn"
-            name="ssn"
-            placeholder="SSN"
-          />
+      ) : null}
+      <SearchByDate
+        showStudentByDateRange={showStudentByDateRange}
+        showError={showError}
+      />
+      {getResponseByDateRange ? (
+        <div>
+          <h3 style={{ fontSize: "20px", width: "200px" }}>Search Result</h3>
+          <table className="table table-striped">
+            <tbody>
+              <tr>
+                <th>Student ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>SSN</th>
+                <th>Major</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>GPA</th>
+              </tr>
+              {getResponseByDateRange.map((response) => {
+                return (
+                  <tr key={response.Student_ID}>
+                    <td>{response.Student_ID}</td>
+                    <td>{response.FirstName}</td>
+                    <td>{response.LastName}</td>
+                    <td>{response.SSN}</td>
+                    <td>{response.Major}</td>
+                    <td>{response.DOB}</td>
+                    <td>{response.Address}</td>
+                    <td>{response.GPA}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <button
+            className="btn btn-default"
+            style={{
+              marginBottom: "15px",
+            }}
+            onClick={() => showStudentByDateRange(null)}
+          >
+            Close
+          </button>
         </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputMajord3">
-            Major
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="major"
-            name="major"
-            placeholder="Major"
-            required="required"
-          />
-        </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputDOB3">
-            Date of birth
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            id="dob"
-            name="dob"
-            placeholder="Date of birth"
-          />
-        </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputAddress3">
-            Address
-          </label>
-          <input
-            type="address"
-            className="form-control"
-            id="addr"
-            name="address"
-            placeholder="Address"
-          />
-        </div>
-        <div className="form-group">
-          <label className="sr-only" htmlFor="exampleInputGPA3">
-            GPA
-          </label>
-          <input
-            type="float"
-            className="form-control"
-            id="gpa"
-            name="gpa"
-            placeholder="GPA"
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-default"
-          style={{
-            width: "70px",
-            height: "38px",
-            marginTop: "30px",
-          }}
-        >
-          Add
-        </button>
-      </form>
+      ) : null}
     </div>
   );
 }

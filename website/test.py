@@ -1,8 +1,12 @@
 from csv import DictReader
 import csv
 from distutils.command.install_egg_info import to_filename
+from sqlite3 import Date
 import uuid
 import json
+import string
+import re
+from flask import jsonify
 
 column_names = ['Student_ID','FirstName', 'LastName', 'SSN', 'Major', 'DOB', 'Address', 'GPA']
 
@@ -55,25 +59,51 @@ column_names = ['Student_ID','FirstName', 'LastName', 'SSN', 'Major', 'DOB', 'Ad
         
 #         return json.dumps(db_to_list)
 
-from tempfile import NamedTemporaryFile
-import shutil
 
-my_student =  {"Student_ID": "686a1c4e","FirstName": "Test","LastName": "Rousoglou","SSN": "213-313-623","Major": "CS",
-"DOB": "2000-04-14","Address": "22 Irving St, MA, 02912","GPA": "4.0"}
-temp_file = NamedTemporaryFile(mode='a', delete=True)
-
-with open('studentdb.csv', mode='r') as csv_file, temp_file:
-    reader = csv.DictReader(csv_file, fieldnames=column_names)
-    writer = csv.DictWriter(temp_file, fieldnames=column_names)
-    writer.writeheader()
-    for row in reader:
-        if row['Student_ID'] != '686a1c4e' and row['SSN'] == '213-313-623':
-            print('<h1>ERROR: SSN exists in the database</h1>')
-        elif row['Student_ID'] == '686a1c4e':
-            row['FirstName'], row['LastName'], row['SSN'], row['Major'], row['DOB'], row['Address'], row['GPA'] = "Test", "Test", "Test", "Test", "Test", "Test", "Test"
-        row  = {'Student_ID':'686a1c4e' ,"FirstName": row['FirstName'],'LastName' : row['LastName'],'SSN': row['SSN'],'Major': row['Major'],'DOB': row['DOB'],'Address': row['Address'], 'GPA':row['GPA']}
-        print(row)
-        writer.writerow(row)    
-        
-shutil.move(temp_file.name, 'studentdb.csv')
             
+# def check_ssn(ssn):
+#     with open('studentdb.csv', mode='r+') as csv_file:
+#         reader = DictReader(csv_file)
+#         field_names = reader.fieldnames
+    
+#         ssn_set = set()
+
+        
+#         for row in reader:
+#             for header, col_value in row.items():
+#                 if header == 'SSN':
+#                     ssn_set.add(col_value)
+            
+#     if ssn in ssn_set:
+#         return "<h1> ERROR: SSN exists in the database <h1>"
+
+my = [{'FirstName': 'Pavlos', 'LastName': 'Rousoglou', 'SSN': '1', 'Major': 'CS', 'DOB': '20', 'Address': 'IRV', 'GPA': '3.5'}, {'FirstName': 'Stelios', 'LastName': 'Telios', 'SSN': '1', 'Major': 'CS', 'DOB': '20', 'Address': 'IRV', 'GPA': '3.5'}]
+
+entry = {'FirstName': 'Pavlos', 'LastName': 'Telios', 'SSN': '', 'Major': '', 'DOB': '', 'Address': '', 'GPA': '3.94'}
+
+# for key, value in entry.items():
+#     if len(value) > 0:
+#         new_db[key] = value
+# print(new_db)
+
+# print(len(my.items() & entry.items()))
+from datetime import date, datetime
+
+
+from_date = '2022-09-27'
+
+print(datetime)
+
+date_time_obj = datetime.strptime(from_date, r'%Y-%m-%d').date()
+
+
+print ("The type of the date is now",  type(date_time_obj))
+print ("The date is", date_time_obj)
+
+
+# with open('studentdb.csv', mode='r') as csv_file:
+#     reader = csv.DictReader(csv_file)
+
+#     for row in reader:
+#         for key, value in row.items():
+#             if key == 'DOB' and (value):

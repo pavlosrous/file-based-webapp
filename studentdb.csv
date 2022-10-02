@@ -1,3 +1,6 @@
 Student_ID,FirstName,LastName,SSN,Major,DOB,Address,GPA
-2f02d230,Stelios,Rousoglou,121-139-9122,PA,1998-07-15,asdasd,3.95
-081cfff4,Pavlos,pavlos,113-123-133,MA,2000-04-14,"22 Irving St, MA, 02912",4.0
+dddc9a1c,Stelios,Rousoglou,111-11-1113,MA,2022-09-27,22 Irving Street,3.94
+17e35e91,Pavlos,Rousoglou,333-33-3333,CS,2022-09-26,22 Irving Street,3.9
+04832326,Pavlos,R,109-01-6211,asd,2022-09-27,22 Irving Street,0
+74e8b154,Pavlos,R,109-01-6212,EC,2022-09-27,22 Irving Street,0
+5e1d8066,Stelios,Rousoglou,,sdasd,2018-05-02,127 Saint Clemens Rd,
