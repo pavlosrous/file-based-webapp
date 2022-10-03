@@ -1,5 +1,6 @@
 import json
 from os import abort
+from os.path import exists
 from flask import Blueprint, request, abort, jsonify, make_response
 from website import create_db, add_student, delete_student_by_id, find_student_by_all, find_student_by_any, get_student_by_id, get_students, get_students_by_gpa, get_students_by_gpa_single, get_students_date_single, get_students_drange, update_student_by_id
 
@@ -14,7 +15,8 @@ def landing_page():
 # ------------------------------------------------ GET ------------------------------------------------ #
 @views.route('/get', methods = ['GET'])
 def get_all():
-    create_db()
+    if (exists('studentdb.csv') == False):
+        create_db()
     return get_students()
 
 @views.route('/get/<id>/', methods = ['GET'])
