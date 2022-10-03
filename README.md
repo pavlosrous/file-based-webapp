@@ -10,10 +10,10 @@ Simple file-based database processing application
 6. Navigate to the ```ui``` directory and run ```npm install``` in the terminal
 
 ### To start the project
-1. Run ```main.py```
+1. Run ```main.py``` (start backend)
 2. From the terminal:
   - ```cd ui```
-  - ```npm start```
+  - ```npm start``` (start frontend)
 3. Navigate to ```locahost:3000```
 
 ## Project summary and usage
