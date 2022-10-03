@@ -1,13 +1,15 @@
 from csv import DictReader, DictWriter
 import csv
 from hashlib import new
+from hashlib import new
 import json
 import os
 import shutil
 from socket import fromfd
 from tempfile import NamedTemporaryFile
 from tkinter import E
-from flask import Flask, abort, jsonify, make_response
+from tkinter import E
+from flask import Flask, abort, jsonify, make_response, abort, jsonify, make_response
 import pandas as pd
 from datetime import datetime
 from flask_cors import CORS
@@ -80,11 +82,15 @@ def add_student(entry):
     if (status != True):
         return make_response(jsonify(status), 400)
 
+    status = error_checking(entry)
+    if (status != True):
+        return make_response(jsonify(status), 400)
+
     new_id = unique_id()
 
     if (check_ssn(entry[2])):
         with open('studentdb.csv', mode='a') as csv_file:
-            db_entry = {'Student_ID': new_id, 'FirstName': string.capwords(entry[0]), 'LastName': string.capwords(entry[1]), 'SSN': entry[2], 'Major': entry[3], 'DOB': entry[4], 'Address': entry[5], 'GPA': entry[6]}
+            db_entry = {'Student_ID': new_id, 'FirstName': string.capwords(string.capwords(entry[0])), 'LastName': string.capwords(string.capwords(entry[1])), 'SSN': entry[2], 'Major': entry[3], 'DOB': entry[4], 'Address': entry[5], 'GPA': entry[6]}
             
             writer = DictWriter(csv_file, fieldnames=column_names)
             writer.writerow(db_entry)
@@ -99,8 +105,14 @@ def update_student_by_id(id, entry):
     if (status != True):
         return make_response(jsonify(status), 400)
 
+
+    status = error_checking(entry)
+    if (status != True):
+        return make_response(jsonify(status), 400)
+
     temp_file = open('tempfile.csv', mode='w')
     absent_flag = True
+
 
     with open('studentdb.csv', mode='r') as csv_file:
         reader = csv.DictReader(csv_file, fieldnames=column_names)
@@ -135,6 +147,23 @@ def delete_student_by_id(id):
                     new_db.append(row)
     return updatedb(new_db)
 
+def get_students_drange(from_d, to):
+    new_db = []
+    from_date = datetime.strptime(from_d, r'%Y-%m-%d').date()
+    to_date = datetime.strptime(to, r'%Y-%m-%d').date()
+
+    if to_date < from_date: 
+        return make_response(jsonify("BAD REQUEST: To date cannot be smaller than from date"), 400)
+
+    with open('studentdb.csv', mode='r') as csv_file:
+        reader = csv.DictReader(csv_file)
+
+        for row in reader:
+            for header, col_value in row.items():
+                if header == 'DOB' and (from_date <= datetime.strptime(col_value, r'%Y-%m-%d').date() <= to_date):
+                    new_db.append(row)
+
+    return make_response(jsonify(new_db), 200)
 
 
 

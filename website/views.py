@@ -56,7 +56,7 @@ def get_student_by_gpa(lower, upper):
 def post_one():
     entry = [request.json['FirstName'], request.json['LastName'],request.json['SSN'],request.json['Major'],request.json['DOB'], request.json['Address'], request.json['GPA']]
     return add_student(entry)
-    
+        
 
 # ------------------------------------------------ UPDATE ------------------------------------------------ #
 @views.route('/update/<id>/', methods = ['PUT'])
@@ -67,6 +67,7 @@ def update_by_id(id):
 
 @views.route('/delete/<id>/', methods = ['DELETE'])
 def delete_by_id(id):
+    print(id)
     print(id)
     return delete_student_by_id(id)
 
