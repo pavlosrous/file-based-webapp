@@ -57,3 +57,11 @@ form * {
   background-color: lightblue;
   border-color: black;
 }
+
+table.table-striped th {
+  font-size: 20px;
+}
+
+table.table-striped td {
+  font-size: 15px;
+}
