@@ -44,3 +44,24 @@ form td:last-child {
 form * {
   font-size: 20px;
 }
+
+/* Buttons */
+.btn.btn-default {
+  border-color: black;
+  margin-top: 12px;
+  background-color: lightyellow;
+  margin-left: 5px;
+}
+
+.btn.btn-default:hover {
+  background-color: lightblue;
+  border-color: black;
+}
+
+table.table-striped th {
+  font-size: 20px;
+}
+
+table.table-striped td {
+  font-size: 15px;
+}
