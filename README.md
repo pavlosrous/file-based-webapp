@@ -6,7 +6,7 @@ Simple file-based database processing application
 2. ```pip install Flask```
 3. ```pip install flask-marshmallow```
 4. ```pip install Flask-Cors```
-5. ```npm install boostrap```
+5. ```npm install bootstrap```
 
 ### To start the project
 1. Run ```main.py```
