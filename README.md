@@ -1,12 +1,13 @@
 # file-based-webapp
 Simple file-based database processing application
 
-### Dependencies
+### Prerequisites
 1. Make sure you have ```pip``` and Node JS (preferably V.16.14.2) 
 2. ```pip install Flask```
 3. ```pip install flask-marshmallow```
 4. ```pip install Flask-Cors```
 5. ```npm install bootstrap```
+6. Navigate to the ```ui``` directory and run ```npm install``` in the terminal
 
 ### To start the project
 1. Run ```main.py```
