@@ -25,7 +25,7 @@ The landing page should look something like this (the student IDs will vary beca
 ![image](https://user-images.githubusercontent.com/70917323/193509242-ee1fb3a4-f0e1-442f-a603-c6771f57c60b.png)
 
 
-This you can do with the "database" are:
+Possible operations are:
 1. Add new students
 2. Delete students 
 3. Update student attributes
