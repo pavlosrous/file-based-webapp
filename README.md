@@ -9,15 +9,20 @@ Simple file-based database processing application
 5. ```npm install bootstrap```
 6. Navigate to the ```ui``` directory and run ```npm install``` in the terminal
 
-### To start the project
-1. Run ```main.py``` (start backend)
-2. From the terminal:
+### To start the project (assuming docker is already installed on the local machine)
+1. ```docker pull postgres```
+2. ```docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres```
+3. ```docker ps``` to verify that the container is up and running
+4. You can optionally access the container by running ```docker ps``` to retrieve the id and then ```docker exec -it <container-id> bash``` to access
+the container's shell. From there, you can access postgres by running ```psql -U postgres```
+6. Run ```app.py``` (start backend)
+7. From the terminal:
   - ```cd ui```
   - ```npm start``` (start frontend)
-3. Navigate to ```locahost:3000```
+8. Navigate to ```locahost:3000```
 
 ## Project summary and usage
-This is a simple web application written in Flask and ReactJS with a sole purpose of displaying a database of students. Instead of a classic DBMS, we are using plain ```csv``` files. <br /> <br />
+This is a simple web application written in Flask and ReactJS with a sole purpose of displaying a database of students. PostgreSQL is used to retrieve student information
 
 ### Landing Page 
 The landing page should look something like this (the student IDs will vary because they are auto generated attributes) 
