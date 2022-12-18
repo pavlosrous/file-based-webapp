@@ -14,9 +14,11 @@ function InsertForm(props) {
   const insertStudent = () => {
     APIService.InsertStudent(fname, lname, ssn, major, dob, address, gpa)
       .then((response) => {
-        if (response.includes("BAD REQUEST")) {
+        if (typeof response === "string" && response.includes("BAD REQUEST")) {
           throw new Error(response.split(":")[1]);
         } else {
+          console.log(response)
+
           props.insertStudent(response);
           props.showError(null);
         }

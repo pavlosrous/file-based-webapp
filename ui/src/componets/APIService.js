@@ -6,13 +6,13 @@ export default class APIService {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        FirstName: first,
-        LastName: last,
-        SSN: ssn,
-        Major: major,
-        DOB: dob,
-        Address: address,
-        GPA: gpa,
+        fname: first,
+        lname: last,
+        ssn: ssn,
+        major: major,
+        dob: dob,
+        address: address,
+        gpa: gpa,
       }),
     }).then((response) => response.json());
   }
@@ -24,13 +24,13 @@ export default class APIService {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        FirstName: first,
-        LastName: last,
-        SSN: ssn,
-        Major: major,
-        DOB: dob,
-        Address: address,
-        GPA: gpa,
+        fname: first,
+        lname: last,
+        ssn: ssn,
+        major: major,
+        dob: dob,
+        address: address,
+        gpa: gpa,
       }),
     }).then((response) => response.json());
   }

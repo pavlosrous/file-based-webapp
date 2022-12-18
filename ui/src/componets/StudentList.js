@@ -8,8 +8,8 @@ function StudentList(props) {
   };
 
   const deleteStudent = (student) => {
-    console.log(student.Student_ID);
-    APIService.DeleteStudent(student.Student_ID)
+    console.log(student.id);
+    APIService.DeleteStudent(student.id)
       .then((response) => props.deleteStudent(response))
       .catch((error) => console.log(error));
   };
@@ -21,15 +21,15 @@ function StudentList(props) {
         // console.log(props.students) &&
         props.students.map((student) => {
           return (
-            <tr key={student.Student_ID}>
-              <td>{student.Student_ID}</td>
-              <td>{student.FirstName}</td>
-              <td>{student.LastName}</td>
-              <td>{student.SSN}</td>
-              <td>{student.Major}</td>
-              <td>{student.DOB}</td>
-              <td>{student.Address}</td>
-              <td>{student.GPA}</td>
+            <tr key={student.id}>
+              <td>{student.id}</td>
+              <td>{student.fname}</td>
+              <td>{student.lname}</td>
+              <td>{student.ssn}</td>
+              <td>{student.major}</td>
+              <td>{student.dob}</td>
+              <td>{student.address}</td>
+              <td>{student.gpa}</td>
               <div className="row">
                 <div className="col-mid-1">
                   <button

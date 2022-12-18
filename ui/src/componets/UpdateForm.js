@@ -14,18 +14,18 @@ function UpdateForm(props) {
 
   //this makes Update display the info of the student we want to update. Without it, we would be able to click Update multiple times
   useEffect(() => {
-    setFname(props.student.FirstName);
-    setLname(props.student.LastName);
-    setSsn(props.student.SSN);
-    setMajor(props.student.Major);
-    setDob(props.student.DOB);
-    setAddress(props.student.Address);
-    setGpa(props.student.GPA);
+    setFname(props.student.fname);
+    setLname(props.student.lname);
+    setSsn(props.student.ssn);
+    setMajor(props.student.major);
+    setDob(props.student.dob);
+    setAddress(props.student.address);
+    setGpa(props.student.gpa);
   }, [props.student]); //specify props here to be according to these
 
   const submitStudent = (student) => {
     APIService.UpdateStudent(
-      props.student.Student_ID,
+      props.student.id,
       fname,
       lname,
       ssn,

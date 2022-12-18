@@ -31,21 +31,22 @@ function App() {
       },
     })
       .then((response) => response.json())
-      .then((response) => setStudents(response)) // save our response (which is students) inside the setArticles hook
+      .then((response) =>
+        setStudents(response)
+      ) // save our response (which is students) inside the setArticles hook
       .catch((error) => console.log(error));
   }, []);
 
   const editStudent = (student) => {
     setEditedStudent(student);
   };
-  // notifies App.js that an update happened so we can update the UI
 
   const submitStudent = (student) => {
     setStudents(student);
   };
 
-  // notifies App.js that an insert happened so we can update the UI
   const insertStudent = (student) => {
+    console.log(student)
     if (JSON.stringify(student).split(":")[0].includes("ERROR")) {
       console.log(JSON.stringify(student));
       console.log("ERROR");
@@ -150,15 +151,15 @@ function App() {
               </tr>
               {getResponseById.map((response) => {
                 return (
-                  <tr key={response.Student_ID}>
-                    <td>{response.Student_ID}</td>
-                    <td>{response.FirstName}</td>
-                    <td>{response.LastName}</td>
-                    <td>{response.SSN}</td>
-                    <td>{response.Major}</td>
-                    <td>{response.DOB}</td>
-                    <td>{response.Address}</td>
-                    <td>{response.GPA}</td>
+                  <tr key={response.id}>
+                    <td>{response.id}</td>
+                    <td>{response.fname}</td>
+                    <td>{response.lname}</td>
+                    <td>{response.ssn}</td>
+                    <td>{response.major}</td>
+                    <td>{response.dob}</td>
+                    <td>{response.address}</td>
+                    <td>{response.gpa}</td>
                   </tr>
                 );
               })}
@@ -175,49 +176,49 @@ function App() {
           </button>
         </div>
       ) : null}
-      <SearchByAny showStudentByAny={showStudentByAny} showError={showError} />
-      {getResponseByAny ? (
-        <div>
-          <h3 style={{ fontSize: "20px", width: "200px" }}>Search Result</h3>
-          <table className="table table-striped">
-            <tbody>
-              <tr>
-                <th>Student ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>SSN</th>
-                <th>Major</th>
-                <th>Date of Birth</th>
-                <th>Address</th>
-                <th>GPA</th>
-              </tr>
-              {getResponseByAny.map((response) => {
-                return (
-                  <tr key={response.Student_ID}>
-                    <td>{response.Student_ID}</td>
-                    <td>{response.FirstName}</td>
-                    <td>{response.LastName}</td>
-                    <td>{response.SSN}</td>
-                    <td>{response.Major}</td>
-                    <td>{response.DOB}</td>
-                    <td>{response.Address}</td>
-                    <td>{response.GPA}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <button
-            className="btn btn-default"
-            style={{
-              marginBottom: "15px",
-            }}
-            onClick={() => showStudentByAny(null)}
-          >
-            Close
-          </button>
-        </div>
-      ) : null}
+      {/*<SearchByAny showStudentByAny={showStudentByAny} showError={showError} />*/}
+      {/*{getResponseByAny ? (*/}
+      {/*  <div>*/}
+      {/*    <h3 style={{ fontSize: "20px", width: "200px" }}>Search Result</h3>*/}
+      {/*    <table className="table table-striped">*/}
+      {/*      <tbody>*/}
+      {/*        <tr>*/}
+      {/*          <th>Student ID</th>*/}
+      {/*          <th>First Name</th>*/}
+      {/*          <th>Last Name</th>*/}
+      {/*          <th>SSN</th>*/}
+      {/*          <th>Major</th>*/}
+      {/*          <th>Date of Birth</th>*/}
+      {/*          <th>Address</th>*/}
+      {/*          <th>GPA</th>*/}
+      {/*        </tr>*/}
+      {/*        {getResponseByAny.map((response) => {*/}
+      {/*          return (*/}
+      {/*            <tr key={response.id}>*/}
+      {/*              <td>{response.id}</td>*/}
+      {/*              <td>{response.fname}</td>*/}
+      {/*              <td>{response.lname}</td>*/}
+      {/*              <td>{response.ssn}</td>*/}
+      {/*              <td>{response.major}</td>*/}
+      {/*              <td>{response.dob}</td>*/}
+      {/*              <td>{response.address}</td>*/}
+      {/*              <td>{response.gpa}</td>*/}
+      {/*            </tr>*/}
+      {/*          );*/}
+      {/*        })}*/}
+      {/*      </tbody>*/}
+      {/*    </table>*/}
+      {/*    <button*/}
+      {/*      className="btn btn-default"*/}
+      {/*      style={{*/}
+      {/*        marginBottom: "15px",*/}
+      {/*      }}*/}
+      {/*      onClick={() => showStudentByAny(null)}*/}
+      {/*    >*/}
+      {/*      Close*/}
+      {/*    </button>*/}
+      {/*  </div>*/}
+      {/*) : null}*/}
       <SearchByDateRange
         showStudentByDateRange={showStudentByDateRange}
         showError={showError}
@@ -239,15 +240,15 @@ function App() {
               </tr>
               {getResponseByDateRange.map((response) => {
                 return (
-                  <tr key={response.Student_ID}>
-                    <td>{response.Student_ID}</td>
-                    <td>{response.FirstName}</td>
-                    <td>{response.LastName}</td>
-                    <td>{response.SSN}</td>
-                    <td>{response.Major}</td>
-                    <td>{response.DOB}</td>
-                    <td>{response.Address}</td>
-                    <td>{response.GPA}</td>
+                  <tr key={response.id}>
+                    <td>{response.id}</td>
+                    <td>{response.fname}</td>
+                    <td>{response.lname}</td>
+                    <td>{response.ssn}</td>
+                    <td>{response.major}</td>
+                    <td>{response.dob}</td>
+                    <td>{response.address}</td>
+                    <td>{response.gpa}</td>
                   </tr>
                 );
               })}
@@ -285,15 +286,15 @@ function App() {
               </tr>
               {getResponseByDateMonthRange.map((response) => {
                 return (
-                  <tr key={response.Student_ID}>
-                    <td>{response.Student_ID}</td>
-                    <td>{response.FirstName}</td>
-                    <td>{response.LastName}</td>
-                    <td>{response.SSN}</td>
-                    <td>{response.Major}</td>
-                    <td>{response.DOB}</td>
-                    <td>{response.Address}</td>
-                    <td>{response.GPA}</td>
+                  <tr key={response.id}>
+                    <td>{response.id}</td>
+                    <td>{response.fname}</td>
+                    <td>{response.last}</td>
+                    <td>{response.ssn}</td>
+                    <td>{response.major}</td>
+                    <td>{response.dob}</td>
+                    <td>{response.address}</td>
+                    <td>{response.gpa}</td>
                   </tr>
                 );
               })}
@@ -328,15 +329,15 @@ function App() {
               </tr>
               {getResponseByGPA.map((response) => {
                 return (
-                  <tr key={response.Student_ID}>
-                    <td>{response.Student_ID}</td>
-                    <td>{response.FirstName}</td>
-                    <td>{response.LastName}</td>
-                    <td>{response.SSN}</td>
-                    <td>{response.Major}</td>
-                    <td>{response.DOB}</td>
-                    <td>{response.Address}</td>
-                    <td>{response.GPA}</td>
+                  <tr key={response.id}>
+                    <td>{response.id}</td>
+                    <td>{response.fname}</td>
+                    <td>{response.lname}</td>
+                    <td>{response.ssn}</td>
+                    <td>{response.major}</td>
+                    <td>{response.dob}</td>
+                    <td>{response.address}</td>
+                    <td>{response.gpa}</td>
                   </tr>
                 );
               })}
