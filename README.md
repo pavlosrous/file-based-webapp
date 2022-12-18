@@ -27,7 +27,7 @@ This is a simple web application written in Flask and ReactJS with a sole purpos
 ### Landing Page 
 The landing page should look something like this (the student IDs will vary because they are auto generated attributes) 
 
-![image](https://user-images.githubusercontent.com/70917323/193509242-ee1fb3a4-f0e1-442f-a603-c6771f57c60b.png)
+<img width="1440" alt="Screen Shot 2022-12-18 at 2 12 51 AM" src="https://user-images.githubusercontent.com/70917323/208286092-504b9ab1-211a-4c14-a7b7-5b88d7d42369.png">
 
 
 Possible operations are:
@@ -72,18 +72,6 @@ In case you input an attribute in the wrong format, you will see an alert below 
 - Use the **Search By ID** option to find the student with the specific ID
 
 ![image](https://user-images.githubusercontent.com/70917323/193511950-fdbf8ea6-e5c6-4711-ba7f-ec73dd3e6a94.png)
-
-- Use the **Search By All/Any** option to make more complex queries. The idea behind this option is:
-   - If you only enter one attribute (for example **First Name**), you will find all the student with that first name
-   - If you enter multiple attributes, you have two options in the **Choose a search option** dropdown menu. If you use **OR**, you will find all the students that have at least of the attributes specified. For example, if you use ```2022-09-28``` as the date and ```3.4``` as the GPA, you will find all the student with a birth date of 2022-09-28 **OR** a GPA of 3.4. The query result will appear directly underneath the search inputs
-
-![image](https://user-images.githubusercontent.com/70917323/193513165-3dbce65f-758d-4ede-970a-a4d70d2da9c9.png)
-
-
-   - If you use the **AND** option, you will find all the students that have all of the attributes specified. For example, if we use ```Pavlos``` as the First Name and ```2022-09-28``` as the date, you will only get the student with id ```aafcae45``` because that's the only entry that has ```Pavlos``` as the first name and ```2022-09-28``` as the date of birth. In case the student doens't exist, an alert underneath the table will let you know. You can also you the **Usage** as a reminder
-
-   
-![image](https://user-images.githubusercontent.com/70917323/193513889-880cd969-485c-47a4-9dcc-cb29970529e4.png)
 
 
 - Use the **Search By Date Of Birth (Range)** to search for student based on their date of births. If you populate both **From** and **To** fields, you will get all the students with date of births between these two values (the result will be inclusive). Notice how in the example below, the student with id ```aafcae45``` is not return as their date of birth is outside of the interval specified.
