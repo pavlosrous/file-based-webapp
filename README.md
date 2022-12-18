@@ -27,7 +27,9 @@ This is a simple web application written in Flask and ReactJS with a sole purpos
 ### Landing Page 
 The landing page should look something like this (the student IDs will vary because they are auto generated attributes) 
 
-<img width="1440" alt="Screen Shot 2022-12-18 at 2 12 51 AM" src="https://user-images.githubusercontent.com/70917323/208286092-504b9ab1-211a-4c14-a7b7-5b88d7d42369.png">
+
+<img width="1440" alt="Screen Shot 2022-12-18 at 2 16 40 AM" src="https://user-images.githubusercontent.com/70917323/208286181-d7b9da82-e2d7-42e4-886d-5bb4effecc25.png">
+
 
 
 Possible operations are:
