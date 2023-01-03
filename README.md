@@ -8,6 +8,14 @@ Toy Python web appication that uses Flask on the backend and React with Bootstra
 4. ```pip install Flask-Cors```
 5. ```npm install bootstrap```
 6. Navigate to the ```ui``` directory and run ```npm install``` in the terminal
+7. Since we are using Docker to run our PostgreSQL instance, the docker daemon needs to be installed. To do that, follow the instructions here https://docs.docker.com/get-docker/. Once docker is installed, run docker pull postgres from your terminal. This will pull the latest docker image containing PostgreSQL. Then run docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres to start the docker container at port 5432. To verify that the container is up and running, docker ps should output something like this
+```
+CONTAINER ID   IMAGE      COMMAND                  CREATED       STATUS          PORTS                    NAMES
+e405b5bba671   postgres   "docker-entrypoint.s…"   5 hours ago   Up 17 minutes   0.0.0.0:5432->5432/tcp   some-postgres
+```
+
+Please note that the container id will probably differ. 
+
 
 ### To start the project
 1. Run ```main.py``` (start backend)
