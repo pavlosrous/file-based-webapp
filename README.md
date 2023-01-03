@@ -25,7 +25,7 @@ Please note that the container id will probably differ.
 3. Navigate to ```locahost:3000```
 
 ## Project summary and usage
-This is a simple web application written in Flask and ReactJS with a sole purpose of displaying a database of students. Instead of a classic DBMS, we are using plain ```csv``` files. <br /> <br />
+This is a simple web application written in Flask and ReactJS with a sole purpose of displaying a database of students.
 
 ### Landing Page 
 The landing page should look something like this (the student IDs will vary because they are auto generated attributes) 
