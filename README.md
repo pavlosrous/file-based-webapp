@@ -1,5 +1,5 @@
 # file-based-webapp
-Simple file-based database processing application
+Toy Python web appication that uses Flask on the backend and React with Bootstrap on the front end. Unlike the main branch that uses file to store data, this branch is using PostgresQL in a Docker container. 
 
 ### Prerequisites
 1. Make sure you have ```pip``` and Node JS (preferably V.16.14.2) 
