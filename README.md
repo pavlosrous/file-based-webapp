@@ -1,5 +1,5 @@
 # file-based-webapp
-Simple file-based database processing application
+Toy Python web appication that uses Flask on the backend and React with Bootstrap on the front end. Instead of a proper database, simple csv files are used to store data.
 
 ### Prerequisites
 1. Make sure you have ```pip``` and Node JS (preferably V.16.14.2) 
