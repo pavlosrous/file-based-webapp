@@ -6,7 +6,6 @@ Toy Python web appication that uses Flask on the backend and React with Bootstra
 2. ```pip install Flask```
 3. ```pip install flask-marshmallow```
 4. ```pip install Flask-Cors```
-5. ```npm install bootstrap```
 6. Navigate to the ```ui``` directory and run ```npm install``` in the terminal
 
 ### To start the project (assuming docker is already installed on the local machine)
